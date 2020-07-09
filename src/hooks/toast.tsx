@@ -11,8 +11,8 @@ export interface ToastMessage {
 }
 
 interface ToastContextData {
-    addToast(message: Omit<ToatsMessage, 'id'>): void;
-    removeToast(): void;
+    addToast(message: Omit<ToastMessage, 'id'>): void;
+    removeToast(id: string): void;
 }
 
 const ToastContext = createContext<ToastContextData>({} as ToastContextData);
@@ -20,6 +20,7 @@ const ToastContext = createContext<ToastContextData>({} as ToastContextData);
 const ToastProvider: React.FC = ({ children }) => {
     const [messages, setMessages] = useState<ToastMessage[]>([]);
 
+    // Create a toast message in the screen
     const addToast = useCallback(({ type, title, description }: Omit<ToastMessage, 'id'>) => {
         const id = uuid();
 
@@ -33,8 +34,9 @@ const ToastProvider: React.FC = ({ children }) => {
         setMessages(oldMessages => [...oldMessages, toast]);
     }, []);
 
-    const removeToast = useCallback(() => {
-        console.log('removeToast');
+    // Remove a toast message from the screen
+    const removeToast = useCallback((id: string) => {
+        setMessages(state => state.filter(message => message.id !== id));
         // Continuar minuto 10:00 da aula
     }, []);
 
