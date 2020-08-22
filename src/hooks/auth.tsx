@@ -1,9 +1,15 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
 import api from '../services/api';
 
+interface User {
+    id: string;
+    name: string;
+    avatar_url: string;
+}
+
 interface AuthState {
     token: string;
-    user: object;
+    user: User;
 }
 
 interface SigInCredentials {
@@ -12,9 +18,9 @@ interface SigInCredentials {
 }
 
 interface AuthContextData {
-    user: object;
-    sigIn(credentials: SigInCredentials): Promise<void>;
-    sigOut(): void;
+    user: User;
+    signIn(credentials: SigInCredentials): Promise<void>;
+    signOut(): void;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -31,7 +37,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         return {} as AuthState;
     });
 
-    const sigIn = useCallback(async ({ email, password }) => {
+    const signIn = useCallback(async ({ email, password }) => {
         const response = await api.post('/sessions', {
             email,
             password,
@@ -45,14 +51,14 @@ export const AuthProvider: React.FC = ({ children }) => {
         setData({ token, user });
     }, []);
 
-    const sigOut = useCallback(() => {
+    const signOut = useCallback(() => {
         localStorage.removeItem('@GoBarber:token');
         localStorage.removeItem('@GoBarber:user');
 
         setData({} as AuthState);
     }, []);
 
-    return <AuthContext.Provider value={{ user: data.user, sigIn, sigOut }}>{children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>{children}</AuthContext.Provider>;
 };
 
 export function useAuth(): AuthContextData {

@@ -24,7 +24,7 @@ interface SigInFormData {
 const SignIn: React.FC = () => {
     const formRef = useRef<FormHandles>(null);
 
-    const { sigIn } = useAuth();
+    const { signIn } = useAuth();
     const { addToast } = useToast();
     const history = useHistory();
 
@@ -43,7 +43,7 @@ const SignIn: React.FC = () => {
                     abortEarly: false,
                 });
 
-                await sigIn({
+                await signIn({
                     email: data.email,
                     password: data.password,
                 });
@@ -64,7 +64,7 @@ const SignIn: React.FC = () => {
                 });
             }
         },
-        [sigIn, addToast, history],
+        [signIn, addToast, history],
     );
 
     return (
