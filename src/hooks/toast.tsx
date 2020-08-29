@@ -37,7 +37,6 @@ const ToastProvider: React.FC = ({ children }) => {
     // Remove a toast message from the screen
     const removeToast = useCallback((id: string) => {
         setMessages(state => state.filter(message => message.id !== id));
-        // Continuar minuto 10:00 da aula
     }, []);
 
     return (

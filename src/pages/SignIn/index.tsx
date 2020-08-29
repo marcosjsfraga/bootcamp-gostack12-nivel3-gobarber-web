@@ -59,8 +59,8 @@ const SignIn: React.FC = () => {
                 // Send a toast
                 addToast({
                     type: 'error',
-                    title: 'Problema no cadastro',
-                    description: 'Problema ao fazer cadastro, verifique as informações.',
+                    title: 'Problema no login',
+                    description: 'Problema ao fazer login, verifique as informações.',
                 });
             }
         },
