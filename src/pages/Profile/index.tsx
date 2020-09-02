@@ -1,9 +1,9 @@
 import React, { useCallback, useRef } from 'react';
-import { FiMail, FiUser, FiLock, FiCamera } from 'react-icons/fi';
+import { FiMail, FiUser, FiLock, FiCamera, FiArrowLeft } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import api from '../../services/api';
 
 import { useToast } from '../../hooks/toast';
@@ -74,8 +74,23 @@ const Profile: React.FC = () => {
 
     return (
         <Container>
+            <header>
+                <div>
+                    <Link to="/dashboard">
+                        <FiArrowLeft />
+                    </Link>
+                </div>
+            </header>
+
             <Content>
-                <Form ref={formRef} onSubmit={handleSubmit}>
+                <Form
+                    ref={formRef}
+                    initialData={{
+                        name: user.name,
+                        email: user.email,
+                    }}
+                    onSubmit={handleSubmit}
+                >
                     <AvatarInput>
                         <img src={user.avatar_url} alt={user.name} />
                         <button type="button">
@@ -98,7 +113,7 @@ const Profile: React.FC = () => {
                     <Input name="password" icon={FiLock} placeholder="Nova Senha " type="password" />
                     <Input name="password_confirmation" icon={FiLock} placeholder="Confirmar Senha " type="password" />
 
-                    <Button type="submit">Confirmar mudanças</Button>
+                    <Button type="submit">Confirmar</Button>
                 </Form>
             </Content>
         </Container>

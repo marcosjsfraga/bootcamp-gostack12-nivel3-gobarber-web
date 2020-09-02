@@ -189,7 +189,7 @@ const Dashboard: React.FC = () => {
                     <Section>
                         <strong>Manhã</strong>
 
-                        {morningAppointments.length === 0 && <p>Não agendamento neste perído</p>}
+                        {morningAppointments.length === 0 && <p>Não há agendamento neste perído</p>}
 
                         {morningAppointments.map(appointment => (
                             <Appointment key={appointment.id}>
@@ -208,7 +208,7 @@ const Dashboard: React.FC = () => {
                     <Section>
                         <strong>Tarde</strong>
 
-                        {afternoonAppointments.length === 0 && <p>Não agendamento neste perído</p>}
+                        {afternoonAppointments.length === 0 && <p>Não há agendamento neste perído</p>}
 
                         {afternoonAppointments.map(appointment => (
                             <Appointment key={appointment.id}>

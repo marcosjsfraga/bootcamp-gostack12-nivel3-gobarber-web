@@ -109,6 +109,7 @@ export const Section = styled.section`
 
     > p {
         color: #999591;
+        font-style: italic;
     }
 `;
 
